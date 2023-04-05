@@ -1,7 +1,7 @@
 Console maze generator with optional building algorithm (dfs / mst)
 
 To run it, you should change directory to src/ and run
-python3 maze_generator <algorithm : dfs or mst> <height> <width>
+python3 maze_generator "algorithm : dfs or mst" "height" "width"
 
 The maze will be represented with dots as walls.
  

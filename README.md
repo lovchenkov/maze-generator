@@ -1,1 +1,1 @@
-# maze-generator
+console maze generator

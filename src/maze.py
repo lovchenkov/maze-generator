@@ -1,4 +1,7 @@
-from constants import directions
+import sys
+
+from src.constants import *
+from src.player import Player
 
 
 class Maze(object):
@@ -13,6 +16,8 @@ class Maze(object):
     tuple starting_cell
     tuple  ending_cell
     list path -- path from starting to ending cell
+    int edge_length -- edge length in pixels
+    Player player -- player on maze
     """
 
     def __init__(self, height, width):
@@ -23,6 +28,10 @@ class Maze(object):
         self.starting_cell = ()
         self.ending_cell = ()
         self.path = []
+        self.current_cell_in_path = 0
+        self.player = None
+        self.edge_length = min(WIDTH_MAZE // self.width, HEIGHT_MAZE // self.height)
+        self.edge_length -= self.edge_length % BORDER_THICK
 
     def _build_complete_grid(self) -> dict:
         grid = dict()
@@ -31,7 +40,7 @@ class Maze(object):
                 grid[(i, j)] = {'W': True, 'S': True, 'E': True, 'N': True}
         return grid
 
-    def visualize(self) -> None:
+    def write_in_file(self) -> None:
         for i in range(2 * self.starting_cell[1] + 1):
             print('  ', end='')
         print('#')
@@ -75,7 +84,7 @@ class Maze(object):
             print('  ', end='')
         print('#')
 
-    def break_border(self, cell1, cell2, relation: str) -> None:
+    def break_border(self, cell1: tuple, cell2: tuple, relation: str) -> None:
         match relation:
             case 'N':
                 self.grid[cell1]['N'] = False
@@ -119,3 +128,27 @@ class Maze(object):
         while path_end != (-1, -1):
             self.path.insert(0, path_end)
             path_end = parent[path_end]
+
+    def set_player(self):
+        self.player = Player((self.starting_cell[0] - 1, self.starting_cell[1]))
+
+    def is_player_in_range(self, direction: str) -> bool:
+        player_copy = Player(self.player.coord)
+        player_copy.move(direction)
+        if player_copy.coord[0] < 0 or player_copy.coord[0] >= self.height or player_copy.coord[1] < 0 or player_copy.coord[1] >= self.width:
+            return False
+        return True
+
+    def move_player(self, direction: str) -> None:
+        if self.player.coord == self.ending_cell and direction == 'S':
+            self.player.move(direction)
+
+        if not self.is_player_in_range(direction):
+            return
+        if self.player.coord == (-1, self.starting_cell[1]) or not self.grid[self.player.coord][direction]:
+            self.player.move(direction)
+
+    def is_player_finished(self) -> bool:
+        if self.player.coord[0] == self.width:
+            return True
+        return False

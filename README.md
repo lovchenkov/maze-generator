@@ -15,4 +15,6 @@ If you want to exit, use "Esc" button.
 
 If you want to see the path, use "Tab" button.
 
+After closing pygame window, you can find solution in solution/solution.txt
+
 WARNING: there will'be sound if you'll find the way(don't worry, it's innocent)

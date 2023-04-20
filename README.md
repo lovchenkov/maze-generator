@@ -1,7 +1,7 @@
 To install project, you should clone this repo.
-Make sure python3 and pygame module is installed.
+Make sure python3 and pygame module are installed.
 
-To start, use command
+To start, change directory to maze-generator and  use command
 
 python3 start.py <length_of_maze_side> <gen_algoritm: dfs or mst>
 

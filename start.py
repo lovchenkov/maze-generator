@@ -7,8 +7,8 @@ gen_algorithm = sys.argv[2]
 width = height
 if gen_algorithm != 'mst' and gen_algorithm != 'dfs':
     raise Exception("Incorrect building_algorithm. Try 'dfs' or 'mst'.")
-if height > 30:
-    raise Exception("Size is too big, max value is 30.")
+if gen_algorithm == 'mst' and  height > 25:
+    raise Exception("Size is too big for mst, max value is 30.")
 if height < 5:
     raise Exception("Size it too small, you deserve more.")
 
@@ -90,12 +90,24 @@ while True:
         fps_clock.tick(fps)
 
     if STATUS == "SHOWING_PATH":
-        if maze.grid_size >= 200:
-            fps = 20
-        if maze.grid_size >= 400:
-            fps = 30
+        if maze.grid_size <= 20:
+            fps_clock.tick(10)
+        elif maze.grid_size <= 80:
+            fps_clock.tick(20)
+        elif maze.grid_size <= 150:
+            fps_clock.tick(60)
+        elif maze.grid_size <= 300:
+            fps_clock.tick(100)
+        elif maze.grid_size <= 800:
+            fps_clock.tick(200)
+        elif maze.grid_size <= 2000:
+            fps_clock.tick(400)
+        elif maze.grid_size <= 5000:
+            fps_clock.tick(600)
+        elif maze.grid_size <= 15000:
+            fps_clock.tick(1000)
+
         screen.fill(SCREEN_COLOR)
         draw_maze(maze)
         draw_path(maze)
-        fps_clock.tick(fps)
         pygame.display.flip()

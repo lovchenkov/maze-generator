@@ -18,6 +18,7 @@ class Maze(object):
     list path -- path from starting to ending cell
     int edge_length -- edge length in pixels
     Player player -- player on maze
+    float EPSILON -- small number depending on edge length, for better drawing
     """
 
     def __init__(self, height, width):
@@ -30,8 +31,8 @@ class Maze(object):
         self.path = []
         self.current_cell_in_path = 0
         self.player = None
-        self.edge_length = min(WIDTH_MAZE // self.width, HEIGHT_MAZE // self.height)
-        self.edge_length -= self.edge_length % BORDER_THICK
+        self.edge_length = min(WIDTH_MAZE / self.width, HEIGHT_MAZE / self.height)
+        self.EPSILON = self.edge_length / 30
 
     def _build_complete_grid(self) -> dict:
         grid = dict()

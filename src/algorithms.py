@@ -1,6 +1,7 @@
-from maze import Maze
+from src.maze import Maze
 import random
-from constants import directions
+from src.constants import directions
+from src.display import *
 
 
 def random_starting_cell(maze: Maze) -> tuple:
@@ -57,6 +58,7 @@ def build_maze_with_mst(maze: Maze) -> None:
 
     maze.grid[maze.starting_cell]['N'] = False
     maze.grid[maze.ending_cell]['S'] = False
+
 
 
 

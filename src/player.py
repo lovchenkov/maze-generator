@@ -1,11 +1,11 @@
 
 
-class Cell(object):
+class Player(object):
     """
     keeps current cell that the player is on. We can move it in four
     directions.
     """
-    def __init__(self, coord):
+    def __init__(self, coord: tuple):
         self.coord = coord
         self.path = []
 

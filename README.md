@@ -7,7 +7,7 @@ python3 start.py <length_of_maze_side> <gen_algoritm: dfs or mst>
 
 For example, "python3 start.py 25 dfs".
 
-There are restrictions of size: it should be above 5 and under 30.
+There are restrictions of size: it should be above 5, and for mst algorithm under 25
 
 Then pygame window will open and you can use arrow keys to wander through the maze.
 

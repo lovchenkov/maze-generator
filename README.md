@@ -1,10 +1,18 @@
-Console maze generator with optional building algorithm (dfs / mst)
+To install project, you should clone this repo.
+Make sure python3 and pygame module is installed.
 
-To run it, you should change directory to src/ and run
-python3 maze_generator "algorithm : dfs or mst" "height" "width"
+To start, use command
 
-The maze will be represented with dots as walls.
- 
-The shortest path is displayed with #
+python3 start.py <length_of_maze_side> <gen_algoritm: dfs or mst>
 
-Graphic interface as well as player class(to be able to solve maze by the player) is in development)
+For example, "python3 start.py 25 dfs".
+
+There are restrictions of size: it should be above 5 and under 30.
+
+Then pygame window will open and you can use arrow keys to wander through the maze.
+
+If you want to exit, use "Esc" button. 
+
+If you want to see the path, use "Tab" button.
+
+WARNING: there will'be sound if you'll find the way(don't worry, it's innocent)

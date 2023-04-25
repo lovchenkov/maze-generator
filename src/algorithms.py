@@ -46,13 +46,20 @@ def build_maze_with_mst(maze: Maze) -> None:
     current_st = [maze.starting_cell]
     current_st_edges = []
     while len(current_st) != maze.grid_size:
+
+        # finding edge with the smallest weight with
+        # exactly one vertex inside st(spanning tree)
         min_edge = [max_weight + 1, 0, 0, '#']
         for edge in edges:
             if (edge[1] in current_st) != (edge[2] in current_st):
                 min_edge = min(min_edge, edge)
         new_cell = min_edge[1] if min_edge[2] in current_st else min_edge[2]
+
+        # adding this edge(and vertex) to st
         current_st.append(new_cell)
         current_st_edges.append(min_edge)
+
+    # deleting all borders that intersect with st edges
     for edge in current_st_edges:
         maze.break_border(edge[1], edge[2], edge[3])
 
